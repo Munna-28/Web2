@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikhil's Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>(¯`★´¯)*𝓝𝓲𝓴𝓱𝓲𝓵'𝓼 𝓟𝓵𝓪𝔂𝓵𝓲𝓼𝓽*(¯´★`¯)</h1>
+    <audio id="audioPlayer" controls>
+        <source id="audioSource" src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <button id="previousBtn">Previous</button>
+    <button id="playPauseBtn">Play</button>
+    <button id="nextBtn">Next</button>
+    <button id="shuffleBtn">Shuffle Off</button>
+
+    <!-- Add a div to display the currently playing song -->
+    <div id="currentSong"></div>
+
+    <ul id="songList">
+        <!-- Populate the list dynamically using JavaScript -->
+    </ul>
+
+    <script>
+        var audioPlayer = document.getElementById('audioPlayer');
+        var audioSource = document.getElementById('audioSource');
+        var playPauseBtn = document.getElementById('playPauseBtn');
+        var nextBtn = document.getElementById('nextBtn');
+        var previousBtn = document.getElementById('previousBtn');
+        var shuffleBtn = document.getElementById('shuffleBtn');
+        var songList = document.getElementById('songList');
+        var currentSongElement = document.getElementById('currentSong');
+
+        var playlist = [];
+        var shuffledPlaylist = [];
+        var currentIndex = 0;
+        var isShuffle = false;
+        var prevIndex = -1; // Variable to store the previous index for "Previous" button in shuffle mode
+
+        // Populate the playlist array with song URLs
+        for (var i = 1; i <= 48; i++) {
+            playlist.push({ name: 'Song ' + i, src: 'song' + i + '.mp3' });
+            // Create list item and add click event listener
+            var listItem = document.createElement('li');
+            listItem.textContent = playlist[i - 1].name;
+            listItem.setAttribute('data-index', i - 1);
+            listItem.addEventListener('click', function() {
+                playSong(parseInt(this.getAttribute('data-index')));
+            });
+            songList.appendChild(listItem);
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function playSong(index) {
+            currentIndex = index;
+            audioSource.src = isShuffle ? shuffledPlaylist[currentIndex].src : playlist[currentIndex].src;
+            audioPlayer.load();
+            audioPlayer.play();
+
+            // Update the current song element with the song information
+            currentSongElement.textContent = 'Playing: ' + playlist[currentIndex].name;
+        }
+
+        // Event listeners for buttons and audio player
+        playPauseBtn.addEventListener('click', function() {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+            } else {
+                audioPlayer.pause();
+            }
+        });
+
+        nextBtn.addEventListener('click', function() {
+            if (isShuffle) {
+                // Store the current index as the previous index for "Previous" button
+                prevIndex = currentIndex;
+                // Play a random song when clicking "Next" in shuffle mode
+                currentIndex = Math.floor(Math.random() * shuffledPlaylist.length);
+            } else {
+                // Store the current index as the previous index for "Previous" button
+                prevIndex = currentIndex;
+                // Move to the next song in the regular order
+                currentIndex = (currentIndex + 1) % playlist.length;
+            }
+            playSong(currentIndex);
+        });
+
+        previousBtn.addEventListener('click', function() {
+            if (isShuffle) {
+                // Play the previous song (stored in prevIndex) in shuffle mode
+                currentIndex = prevIndex;
+            } else {
+                // Move to the previous song in the regular order
+                currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+            }
+            playSong(currentIndex);
+        });
+
+        shuffleBtn.addEventListener('click', function() {
+            isShuffle = !isShuffle;
+            shuffleBtn.textContent = isShuffle ? 'Shuffle On' : 'Shuffle Off';
+            if (isShuffle) {
+                shuffledPlaylist = playlist.slice(); // Create a copy of the playlist
+                shuffleArray(shuffledPlaylist); // Shuffle the copied playlist
+            }
+        });
+
+        // Event listener for the audio player when the song ends
+        audioPlayer.addEventListener('ended', function() {
+            if (isShuffle) {
+                // Play a random song when the current song ends in shuffle mode
+                currentIndex = Math.floor(Math.random() * shuffledPlaylist.length);
+            } else {
+                // Move to the next song in the regular order when the current song ends
+                currentIndex = (currentIndex + 1) % playlist.length;
+            }
+            playSong(currentIndex);
+        });
+
+        // Initial play
+        playSong(currentIndex);
+    </script>
+</body>
+
+</html>
