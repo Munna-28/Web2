@@ -1,0 +1,98 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(45deg, #ff5252, #ff4081, #e040fb, #7c4dff, #536dfe, #03a9f4, #00bcd4, #4caf50);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    margin: 0;
+    padding: 0;
+    color: #333; /* Default text color */
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.navbar {
+    background-color: #3498db; /* Solid background color for the navbar */
+    color: white; /* Text color for the navbar */
+    padding: 10px 0; /* Add padding for better spacing */
+}
+
+.resume {
+    max-width: 800px;
+    margin: 50px auto; /* Center the container on the page */
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 36px;
+    color: #3498db; /* Header text color */
+}
+
+.header p {
+    margin: 5px 0;
+    font-size: 18px;
+    color: #555;
+}
+
+.contact p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #777;
+}
+
+.summary,
+.experience,
+.education {
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 28px;
+    color: #3498db;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.job {
+    margin-bottom: 20px;
+}
+
+.job h3 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.job-title {
+    color: #3498db;
+    font-weight: bold;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+}

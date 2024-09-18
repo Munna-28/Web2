@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="{{url_for('static', filename='styleblog.css')}}">
+    <title>Nikhil's Website</title>
+</head>
+
+<body>
+    <div class="custom-cursor"></div>
+    <div class="trail"></div> <!-- Add this line to create the trail element -->
+
+    <header>
+        <h1>ℕ</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="http://127.0.0.1:5000/cv">About</a></li>
+                <li><a href="http://127.0.0.1:5000/login">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-post">
+            <h2>𝓗𝓮𝔂! 𝓦𝓮𝓵𝓬𝓸𝓶𝓮 𝓽𝓸 𝓶𝔂 𝓹𝓪𝓰𝓮</h2>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 My Blog. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cursor = document.querySelector(".custom-cursor");
+            const trail = document.querySelector(".trail");
+            const trailLength = 5;
+            
+            let mouseX = 0;
+            let mouseY = 0;
+
+            const positions = Array.from({ length: trailLength }, () => ({ x: mouseX, y: mouseY }));
+
+            function updateCursor() {
+                positions.pop();
+                positions.unshift({ x: mouseX, y: mouseY });
+
+                for (let i = 0; i < trailLength; i++) {
+                    const factor = i / trailLength;
+                    const index = (i + 1) % trailLength;
+                    const pos = positions[index];
+
+                    const x = pos.x + (mouseX - pos.x) * factor;
+                    const y = pos.y + (mouseY - pos.y) * factor;
+
+                    trail.style.left = x + "px";
+                    trail.style.top = y + "px";
+                    trail.style.transform = `scale(${1 - factor})`;
+                }
+
+                cursor.style.left = mouseX + "px";
+                cursor.style.top = mouseY + "px";
+
+                requestAnimationFrame(updateCursor);
+            }
+
+            document.addEventListener("mousemove", function (e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Initialize the trail's position
+            trail.style.left = mouseX + "px";
+            trail.style.top = mouseY + "px";
+
+            updateCursor();
+        });
+    </script>
+</body>
+
+</html>

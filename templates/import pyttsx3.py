@@ -1,0 +1,1 @@
+print("pravarsh is a gay")

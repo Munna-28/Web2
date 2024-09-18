@@ -1,0 +1,110 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: url('https://wallpapers.com/images/hd/black-car-4k-tp2who005d8oxzrn.jpg') no-repeat center center/cover;
+    background-position: center top;
+    color: white;
+    animation: fadeIn 1s ease;
+    cursor: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.221);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    font-family: "Sofia", sans-serif;
+    color: #ff440068;
+    font-size: 20px;
+    display: inline;
+    margin-right: 20px;
+    animation: slideInRight 0.5s ease forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+main {
+    padding: 160px 2rem 2rem;
+    position: relative;
+    z-index: 1;
+    animation: slideInUp 1s ease forwards 1s;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.blog-post {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    pointer-events: none;
+    transform-origin: center;
+}
+
+.trail {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.5;
+    transform-origin: center;
+}
